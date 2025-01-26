@@ -33,7 +33,6 @@ function Header() {
         }
       )
       .then((res) => {
-        console.log(res);
         localStorage.setItem("user", JSON.stringify(res.data));
         setOpenDialog(false);
         window.location.reload();
@@ -52,8 +51,8 @@ function Header() {
   }, []);
 
   return (
-    <div className="p-3 shadow-sm flex justify-between items-center px-5">
-      <img src="/logo.svg" />
+    <div className="p-3 flex justify-between items-center px-10 bg-transparent relative z-10 ">
+      <img src="/textLogo.png" className="h-[40px] lg:h-[60px]" />
       <div>
         {user ? (
           <div className="flex items-center gap-3">
@@ -79,11 +78,6 @@ function Header() {
                 </PopoverContent>
               </Popover>
             </div>
-            <a href="/my-trips">
-              <Button variant="outline" className="rounded-full">
-                My Trip
-              </Button>
-            </a>
           </div>
         ) : (
           <Button onClick={() => setOpenDialog(true)}>Sign In</Button>

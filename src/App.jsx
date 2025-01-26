@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Button } from "./components/ui/button";
+import Features from "./components/custom/Features";
 import Hero from "./components/custom/Hero";
 
 function App() {
   return (
     <div>
       <Hero />
+      <Features />
     </div>
   );
 }

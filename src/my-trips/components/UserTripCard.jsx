@@ -26,7 +26,7 @@ function UserTripCard({ trip }) {
     trip && getPlacePhoto();
   }, [trip]);
   return (
-    <Link to={"/view-trip/" + trip?.id}>
+    <Link to={"/dashboard/view-trip/" + trip?.id}>
       <div className="hover:scale-105 transition-all hover:shadow-md p-3">
         <img
           src={photoUrl}

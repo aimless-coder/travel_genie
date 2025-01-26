@@ -11,13 +11,14 @@ function InfoSection({ trip }) {
       };
 
       const result = await GetPlaceDetails(data);
+
       const photoUrlVar = PHOTO_REF.replace(
         "{NAME}",
         result.data.places[0].photos[3].name
       );
       setPhotoUrl(photoUrlVar);
     } catch (error) {
-      console.log("Error:", error);
+      console.error("Error:", error);
     }
   };
 
