@@ -7,11 +7,11 @@ import { RouterProvider } from "react-router";
 import Header from "./components/custom/Header";
 import { Toaster } from "sonner";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import ViewTrip from "./view-trip/[tripID]";
-import MyTrips from "./my-trips";
-import Dashboard from "./dashboard/Dashboard";
-import CreateTrip from "./create-trip/CreateTrip";
-import Home from "./dashboard/Home";
+import Dashboard from "./components/pages/dashboard/Dashboard";
+import Home from "./components/pages/dashboard/Home";
+import CreateTrip from "./components/pages/create-trip/CreateTrip";
+import ViewTrip from "./components/pages/view-trip/[tripID]";
+import MyTrips from "./components/pages/my-trips";
 
 const router = createBrowserRouter([
   {
@@ -43,10 +43,6 @@ const router = createBrowserRouter([
         element: <MyTrips />,
       },
     ],
-  },
-  {
-    path: "my-trips",
-    element: <MyTrips />,
   },
 ]);
 

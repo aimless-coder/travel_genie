@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { GetPlaceDetails, PHOTO_REF } from "@/service/GlobalAPI";
 import { Link } from "react-router-dom";
 

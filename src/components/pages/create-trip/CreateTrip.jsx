@@ -18,10 +18,10 @@ function CreateTrip() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleInputChange = (name, value) => {
+  const handleInputChange = (changes) => {
     setFormData({
       ...formData,
-      [name]: value,
+      ...changes
     });
   };
 
@@ -66,7 +66,7 @@ function CreateTrip() {
               place,
               onChange: (value) => {
                 setPlace(value);
-                handleInputChange("location", value);
+                handleInputChange({location: value});
               },
             }}
           />
@@ -76,7 +76,7 @@ function CreateTrip() {
           <Input
             type="number"
             placeholder="Ex: 3 Days"
-            onChange={(e) => handleInputChange("noOfDays", e.target.value)}
+            onChange={(e) => handleInputChange({noOfDays: e.target.value})}
           />
         </div>
 
@@ -89,7 +89,7 @@ function CreateTrip() {
                 className={`p-4 border rounded-lg hover:shadow-lg cursor-pointer  ${
                   formData?.budget == item.title && "shadow-lg border-black"
                 }`}
-                onClick={() => handleInputChange("budget", item.title)}
+                onClick={() => handleInputChange({budget: item.title})}
               >
                 <h2 className="text-4xl">{item.icon}</h2>
                 <h2 className="font-bold text-lg">{item.title}</h2>
@@ -111,7 +111,10 @@ function CreateTrip() {
                   formData?.noOfPeople == item.people &&
                   "shadow-lg border-black"
                 }`}
-                onClick={() => handleInputChange("noOfPeople", item.people)}
+                onClick={() => handleInputChange({
+                  noOfPeople: item.people,
+                  guest : item.guest
+                })}
               >
                 <h2 className="text-4xl">{item.icon}</h2>
                 <h2 className="font-bold text-lg">{item.title}</h2>

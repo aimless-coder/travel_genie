@@ -5,6 +5,10 @@ export const SelectTravelsList = [
     desc: "A solo in exploration",
     icon: "🙎",
     people: "1",
+    guest:{
+      adult: 1,
+      children: 0,
+    }
   },
   {
     id: 2,
@@ -12,6 +16,10 @@ export const SelectTravelsList = [
     desc: "Two traveler in tandem",
     icon: "👩🏻‍❤️‍👨🏻",
     people: "2",
+    guest:{
+      adult: 2,
+      children: 0,
+    }
   },
   {
     id: 3,
@@ -19,6 +27,10 @@ export const SelectTravelsList = [
     desc: "A family of adventure",
     icon: "👨‍👩‍👧‍👦",
     people: "4",
+    guest:{
+      adult: 2,
+      children: 1,
+    }
   },
   {
     id: 4,
@@ -26,6 +38,10 @@ export const SelectTravelsList = [
     desc: "A solo in exploration",
     icon: "👨‍👩‍👧‍👦",
     people: "4+",
+    guest:{
+      adult: 4,
+      children: 0,
+    }
   },
 ];
 

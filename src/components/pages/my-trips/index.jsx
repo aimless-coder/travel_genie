@@ -1,6 +1,6 @@
 import { db } from "@/service/FirebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from "react-router-dom";
 import UserTripCard from "./components/UserTripCard";
 
@@ -30,6 +30,7 @@ function MyTrips() {
   useEffect(() => {
     GetUserTrip();
   }, []);
+  
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10">
       <h2 className="font-bold text-3xl mb-5">My Trips</h2>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import {useState } from "react";
 import { Button } from "../ui/button";
 import {
   Popover,
@@ -10,8 +10,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
@@ -45,10 +43,6 @@ function Header() {
     },
     onError: (err) => console.log(err),
   });
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   return (
     <div className="p-3 flex justify-between items-center px-10 bg-transparent relative z-10 ">

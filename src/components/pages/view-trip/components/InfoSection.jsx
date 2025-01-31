@@ -1,8 +1,13 @@
+/* eslint-disable react/prop-types */
 import { GetPlaceDetails, PHOTO_REF } from "@/service/GlobalAPI";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function InfoSection({ trip }) {
   const [photoUrl, setPhotoUrl] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const placeholderImg = `https://placehold.co/340?text=${trip?.userSelection?.location?.label}`;
+
   const getPlacePhoto = async () => {
     try {
       const location = trip?.userSelection?.location?.label;
@@ -17,6 +22,7 @@ function InfoSection({ trip }) {
         result.data.places[0].photos[3].name
       );
       setPhotoUrl(photoUrlVar);
+      setLoading(false);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -28,10 +34,17 @@ function InfoSection({ trip }) {
 
   return (
     <div>
-      <img
-        src={photoUrl}
-        className="h-[340px] w-full object-cover rounded-xl"
-      />
+      {loading ? (
+          <img
+            src={placeholderImg}
+            className="rounded-lg h-[340px] w-full object-cover"
+          />
+        ) : (
+          <img
+            src={photoUrl || placeholderImg}
+            className="rounded-lg h-[340px] w-full object-cover"
+          />
+        )}
       <div className="my-5 flex flex-col gap-2">
         <h2 className="font-bold text-2xl">
           {trip?.userSelection?.location?.label}

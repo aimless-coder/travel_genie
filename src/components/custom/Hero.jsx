@@ -1,10 +1,9 @@
-import React from "react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <div className="bg-[url('/bg-hero.webp')] h-[100vh] w-full bg-fill bg-cover overflow-x-hidden grid items-center absolute top-0 left-0 z-0">
+    <div className="bg-[url('/images/bg-hero.webp')] h-[100vh] w-full bg-fill bg-cover overflow-x-hidden grid items-center absolute top-0 left-0 z-0">
       <div className="m-5  md:m-20">
         <div className="flex flex-col justify-center items-center gap-5">
           <h1 className="text-center font-light text-5xl md:text-7xl text-white">
