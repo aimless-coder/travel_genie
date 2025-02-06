@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,6 +11,8 @@ import { chatSession } from "@/service/AIModel";
 import { FaPlane } from "react-icons/fa";
 import { BsDash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/service/FirebaseConfig";
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -18,36 +20,54 @@ function CreateTrip() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleInputChange = (changes) => {
+  const getUserCategories = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user?.email) {
+      try {
+        const userRef = doc(db, "UserDetails", user.email);
+        const docSnap = await getDoc(userRef);
+        
+        if (docSnap.exists()) {
+          return docSnap.data().categories || [];
+        }
+        return [];
+      } catch (error) {
+        console.error("Error fetching user categories:", error);
+        return [];
+      }
+    }
+    return [];
+  };
+
+  const handleInputChange = async (changes) => {
+    const userCategories = await getUserCategories();
     setFormData({
       ...formData,
-      ...changes
+      ...changes,
+      categories: userCategories
     });
   };
 
   const onGenerateTrip = async () => {
-    const user = localStorage.getItem("user");
-
-    if (!user) {
-      console.log("You need to sign in.");
-      return;
-    }
-
     setLoading(true);
 
     const FINAL_PROMPT = AI_PROMPT.replace(
+      "{location}",
+      formData?.location?.label
+    ).replace(
+      "{location}",
+      formData?.location?.label
+    ).replace(
       "{location}",
       formData?.location?.label
     )
       .replace("{noOfDays}", formData?.noOfDays)
       .replace("{traveler}", formData?.noOfPeople)
       .replace("{budget}", formData?.budget)
-      .replace("{noOfDays}", formData?.noOfDays);
 
     const result = await chatSession.sendMessage(FINAL_PROMPT);
     setLoading(false);
     const tripData = JSON.parse(result?.response?.text());
-    console.log("Done");
     navigate("/dashboard/view-trip/generated", {
       state: { userSelection: formData, tripData: tripData },
     });

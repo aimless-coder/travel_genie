@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 function Dashboard() {
@@ -23,7 +22,7 @@ function Dashboard() {
           </div>
         </Link>
       </div>
-      <div className="flex-1 px-10">
+      <div className="flex-1 px-10 w-[calc(100vw-300px)]">
         <Outlet />
       </div>
     </div>

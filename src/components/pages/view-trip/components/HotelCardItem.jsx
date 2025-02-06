@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 function HotelCardItem({ hotel }) {
-  console.log(hotel)
   const [photoUrl, setPhotoUrl] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -13,14 +12,14 @@ function HotelCardItem({ hotel }) {
   const distanceFromCenter = addressMatch ? addressMatch[0] : hotel?.property?.wishlistName;
   ;
 
-  const getPlacePhoto = () => {
+  const getPlacePhoto = useCallback(() => {
     setPhotoUrl(hotel?.property?.photoUrls[1])
     setLoading(false);
-  };
+  }, [hotel]);
 
   useEffect(() => {
     hotel && getPlacePhoto();
-  }, [hotel]);
+  }, [hotel, getPlacePhoto]);
 
   return (
     <Link
@@ -34,7 +33,7 @@ function HotelCardItem({ hotel }) {
       }
       target="_blank"
     >
-      <div className="hover:scale-105 transition-all cursor-pointer">
+      <div className="cursor-pointer w-[200px] h-full flex flex-col align-center p-3 rounded-md shadow-xl hover:scale-105 transition-all">
       {loading ? (
           <img
             src={placeholderImg}
@@ -43,7 +42,7 @@ function HotelCardItem({ hotel }) {
         ) : (
           <img
             src={photoUrl || placeholderImg}
-            className="rounded-lg h-[180px] w-full object-cover"
+            className="rounded-lg h-[180px] w-[180px] object-cover"
           />
         )}
         <div className="my-2 flex flex-col gap-2">

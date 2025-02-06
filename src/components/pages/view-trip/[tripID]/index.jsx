@@ -22,7 +22,6 @@ function ViewTrip() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document:", docSnap.data());
       setTrip(docSnap.data());
     } else {
       console.log("No such data");
@@ -32,8 +31,8 @@ function ViewTrip() {
   return (
     <div className="p-10">
       <InfoSection trip={trip} />
-      <Hotels trip={trip} />
       <Itinerary trip={trip} />
+      <Hotels trip={trip} />
     </div>
   );
 }

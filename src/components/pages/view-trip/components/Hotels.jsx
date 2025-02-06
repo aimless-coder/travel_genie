@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 import HotelCardItem from "./HotelCardItem";
 import axios from "axios";
 import {addDays, format} from "date-fns"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 function Hotels({ trip }) {
   const [hotels, setHotels] = useState([]);
@@ -21,7 +28,6 @@ function Hotels({ trip }) {
             'x-rapidapi-host': 'booking-com15.p.rapidapi.com'
           }
         });
-        console.log(response.data.data[0])
         setLocationId(response.data?.data?.[0]?.dest_id)
 
       } catch (error) {
@@ -34,7 +40,6 @@ function Hotels({ trip }) {
 
   useEffect(() => {
     if (locationId) {
-      console.log("Loc Id", locationId)
       const currentDate = new Date();
       const days = +(trip?.userSelection?.noOfDays)
       const startDate = format(currentDate, 'yyyy-MM-dd');
@@ -57,8 +62,6 @@ function Hotels({ trip }) {
               'x-rapidapi-host': 'booking-com15.p.rapidapi.com'
             }
           });
-
-          console.log("Hotel List", response.data.data)
           setHotels(response.data.data.hotels);
           
         } catch (error) {
@@ -71,13 +74,28 @@ function Hotels({ trip }) {
   }, [locationId]);
 
   return (
-    <div>
+    <div className="py-4 flex flex-col w-full">
       <h2 className="font-bold text-xl mt-1.5 mb-2">Hotel Recommendation</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-col-4 gap-5 py-5">
-        {hotels.length > 0 ? (hotels.map((hotel, index) => (
-          <HotelCardItem key={index} hotel={hotel} />
-        ))): (<h2>No Hotel found.</h2>)}
-        
+      <div className="w-full">
+        <Carousel className="w-[90%] max-w-full mx-auto">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {hotels.length > 0 ? (
+              hotels.map((hotel, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/3 lg:basis-1/3">
+                  <HotelCardItem hotel={hotel} />
+                </CarouselItem>
+              ))
+            ) : (
+              <CarouselItem className="pl-2 md:pl-4">
+                <h2>No Hotel found.</h2>
+              </CarouselItem>
+            )}
+          </CarouselContent>
+          <div className="flex justify-center gap-2 mt-4">
+            <CarouselPrevious />
+            <CarouselNext />
+          </div>
+        </Carousel>
       </div>
     </div>
   );

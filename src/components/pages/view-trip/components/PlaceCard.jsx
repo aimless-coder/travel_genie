@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
 import { GetPlaceDetails, PHOTO_REF } from "@/service/GlobalAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -11,13 +11,10 @@ function PlaceCard({ place }) {
 
   const placeholderImg = `https://placehold.co/100?text=${place.placeName}`;
 
-  const getPlacePhoto = async () => {
+  const getPlacePhoto = useCallback(async () => {
     try {
       const placeText = place.placeName;
-      const data = {
-        textQuery: placeText,
-      };
-
+      const data = { textQuery: placeText };
       const result = await GetPlaceDetails(data);
       const photoUrlVar = PHOTO_REF.replace(
         "{NAME}",
@@ -28,17 +25,18 @@ function PlaceCard({ place }) {
     } catch (error) {
       console.log("Error:", error);
     }
-  };
+  }, [place]);
 
   useEffect(() => {
     place && getPlacePhoto();
-  }, [place]);
+  }, [place, getPlacePhoto]);
+
   return (
     <Link
       to={"https://www.google.com/maps/search/?api=1&query=" + place.placeName}
       target="_blank"
     >
-      <div className="shadow-md rounded-xl p-5 mt-2 flex gap-5 items-center hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
+      <div className="shadow-md rounded-xl p-5 mt-2 flex gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
       {loading ? (
           <img
             src={placeholderImg}
