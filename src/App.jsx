@@ -1,12 +1,10 @@
-import Features from "./components/custom/Features";
-import Hero from "./components/custom/Hero";
+import Home from "./components/pages/Home";
 
 function App() {
   return (
-    <div>
-      <Hero />
-      <Features />
-    </div>
+    <>
+        <Home />
+    </>
   );
 }
 

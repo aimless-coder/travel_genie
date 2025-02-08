@@ -45,7 +45,7 @@ function Header() {
   });
 
   return (
-    <div className="p-3 flex justify-between items-center px-10 bg-transparent relative z-10 ">
+    <div className="fixed top-0 left-0 right-0 p-3 flex justify-between items-center px-10 bg-white shadow-sm z-50">
       <img src="/textLogo.png" className="h-[40px] lg:h-[60px]" />
       <div>
         {user ? (
