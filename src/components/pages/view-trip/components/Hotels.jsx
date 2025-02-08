@@ -3,24 +3,19 @@ import { useEffect, useState } from "react";
 import HotelCardItem from "./HotelCardItem";
 import axios from "axios";
 import {addDays, format} from "date-fns"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
 
 function Hotels({ trip }) {
   const [hotels, setHotels] = useState([]);
   const [locationId, setLocationId] = useState(null);
+
+  const location = trip?.userSelection?.location?.label;
 
   useEffect(() => {
     const fetchLocationId = async () => {
       try {
         const response = await axios.get('https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination', {
           params: {
-            query: trip?.userSelection?.location?.label,
+            query: location,
             locale: 'en-us',
           },
           headers: {
@@ -75,29 +70,25 @@ function Hotels({ trip }) {
 
   return (
     <div className="py-4 flex flex-col w-full">
-      <h2 className="font-bold text-xl mt-1.5 mb-2">Hotel Recommendation</h2>
-      <div className="w-full">
-        <Carousel className="w-[90%] max-w-full mx-auto">
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {hotels.length > 0 ? (
-              hotels.map((hotel, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/3 lg:basis-1/3">
-                  <HotelCardItem hotel={hotel} />
-                </CarouselItem>
-              ))
-            ) : (
-              <CarouselItem className="pl-2 md:pl-4">
-                <h2>No Hotel found.</h2>
-              </CarouselItem>
-            )}
-          </CarouselContent>
-          <div className="flex justify-center gap-2 mt-4">
-            <CarouselPrevious />
-            <CarouselNext />
+  <h2 className="font-bold text-xl mt-1.5 mb-2">Hotel Recommendation</h2>
+  <div className="w-full overflow-x-auto custom-scrollbar py-5">
+    <div className="flex gap-6 px-4 snap-x snap-mandatory">
+      {hotels.length > 0 ? (
+        hotels.map((hotel, index) => (
+          <div key={index} className="flex-shrink-0 w-[300px] snap-start">
+            <HotelCardItem hotel={hotel} />
           </div>
-        </Carousel>
-      </div>
+        ))
+      ) : (
+        <div className="px-2">
+          <h2 className="text-start">No Hotel found.</h2>
+        </div>
+      )}
     </div>
+  </div>
+  <div className="h-[100px]"></div>
+</div>
+
   );
 }
 

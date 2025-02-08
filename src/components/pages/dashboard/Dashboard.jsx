@@ -74,7 +74,7 @@ function Dashboard() {
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
           flex flex-col
           border-r-2 border-gray-200
-          z-10 md:z-0
+          z-20 md:z-0
           shadow-lg md:shadow-none
         `}>
           <div className="flex-1 overflow-y-auto">
@@ -122,7 +122,7 @@ function Dashboard() {
 
         <div className="flex-1 w-full md:w-[calc(100vw-280px)]">
           <div className="h-full overflow-y-auto">
-            <div className="px-6 md:px-10 py-6">
+            <div className="px-5 md:px-10 py-6">
               <Outlet />
             </div>
           </div>

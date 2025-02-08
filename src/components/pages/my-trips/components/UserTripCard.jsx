@@ -43,12 +43,12 @@ function UserTripCard({ trip, onDelete, onToggleFavorite }) {
 
   return (
     <Link to={"/dashboard/view-trip/" + trip?.id}>
-      <div className="hover:scale-105 transition-all hover:shadow-md p-3">
+      <div className="hover:scale-105 transition-all hover:shadow-md p-3 grid place-items-center gap-5 rounded-lg border border-gray-300">
         <img
           src={photoUrl}
-          className="h-[180px] w-[180px] object-cover rounded-lg"
+          className="h-[150px] w-[150px] md:h-[180px] md:w-[180px] object-cover rounded-lg"
         />
-        <div>
+        <div className="flex flex-col justify-center gap-2">
           <h2 className="font-medium text-md">
             {trip?.userSelection?.location?.label}
           </h2>
@@ -57,21 +57,22 @@ function UserTripCard({ trip, onDelete, onToggleFavorite }) {
             {trip?.userSelection?.budget} budget for{" "}
             {trip?.userSelection?.noOfPeople} people.
           </h2>
+
+          <div className="flex w-full justify-evenly">
           <Button
-          variant="destructive"
-          className=""
-          onClick={handleDelete}
-         >
-            <FaTrash />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
-            className={`${trip.isFavorite ? 'text-red-500' : 'text-gray-500'}`}
-            onClick={handleFavorite}
+              className={`${trip.isFavorite ? 'text-red-500' : 'text-white'} bg-[#4b164c] w-[70px] h-[30px]`}
+              onClick={handleFavorite}
+            >
+              {trip.isFavorite ? <FaHeart /> : <FaRegHeart />}
+            </Button>
+            <Button
+            variant="destructive"
+            className="w-[70px] h-[30px]"
+            onClick={handleDelete}
           >
-            {trip.isFavorite ? <FaHeart /> : <FaRegHeart />}
-          </Button>
+              <FaTrash />
+            </Button>
+          </div>
         </div>
       </div>
     </Link>

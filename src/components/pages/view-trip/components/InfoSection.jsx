@@ -15,7 +15,6 @@ import { db } from "@/service/FirebaseConfig";
 
 
 function InfoSection({ trip }) {
-  console.log("Trip 2",trip)
   const [photoUrl, setPhotoUrl] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -57,16 +56,12 @@ function InfoSection({ trip }) {
 
   const shareTrip = async(trip) => {
     try {
-      // If trip doesn't have an ID, save it first
       let tripId = trip.id;
       if (!tripId) {
         tripId = await saveTrip(trip);
       }
-      
-      // Create a shareable URL with the trip ID
       const shareableLink = `${window.location.origin}/dashboard/view-trip/${tripId}`;
-      
-      // Use Web Share API if available
+
       if (navigator.share) {
         await navigator.share({
           title: `Travel Plan to ${trip?.userSelection?.location?.label}`,
@@ -74,7 +69,6 @@ function InfoSection({ trip }) {
           url: shareableLink
         });
       } else {
-        // Fallback to copying to clipboard
         await navigator.clipboard.writeText(shareableLink);
         alert("Link copied to clipboard!");
       }
@@ -111,23 +105,29 @@ function InfoSection({ trip }) {
         <h2 className="font-bold text-2xl">
           {trip?.userSelection?.location?.label}
         </h2>
-        <div className="flex gap-5">
-          <Button onClick={()=>{saveTrip(trip); console.log("Saved")}}>Save Trip</Button>
-          <Button onClick={() => shareTrip(trip)}>Share <FaShareAlt /></Button>
+        <div className="hidden md:flex gap-5">
+          <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c]">Save Trip</Button>
+          <Button onClick={() => shareTrip(trip)} className="bg-[#4b164c]">Share <FaShareAlt /></Button>
         </div>
 
         </div>
         <div className="flex gap-5">
-          <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md">
+          <h2 className="p-1 px-3 bg-[#dd88cf] rounded-full text-white text-xs md:text-md">
             {trip?.userSelection?.noOfDays} Day
           </h2>
-          <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md">
+          <h2 className="p-1 px-3 bg-[#dd88cf] rounded-full text-white text-xs md:text-md">
             {trip?.userSelection?.budget} Budget
           </h2>
-          <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md">
+          <h2 className="p-1 px-3 bg-[#dd88cf] rounded-full text-white text-xs md:text-md">
             {trip?.userSelection?.noOfPeople} people
           </h2>
         </div>
+
+        <div className="flex md:hidden gap-5 mt-2 w-full justify-between">
+          <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c] h-8">Save Trip</Button>
+          <Button onClick={() => shareTrip(trip)} className="bg-[#4b164c] h-8">Share <FaShareAlt /></Button>
+        </div>
+
           <h2 className="py-2 text-gray-500">
             {trip?.tripData?.tripDetail?.description}
           </h2>

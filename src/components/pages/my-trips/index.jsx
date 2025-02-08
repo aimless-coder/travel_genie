@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import UserTripCard from "./components/UserTripCard";
 import { Button } from "@/components/ui/button";
 import { FaHeart } from "react-icons/fa";
+import { toast } from "sonner";
 
 function MyTrips() {
   const [userTrips, setUserTrips] = useState([]);
@@ -27,11 +28,11 @@ function MyTrips() {
   const deleteTrip = async(tripID) =>{
     try {
       await deleteDoc(doc(db, "AITrips", tripID));
-      console.log("Trip deleted")
+      toast.success("Deleted successfully");
       GetUserTrip();
     } catch (error) {
-      console.log("Error", error);
-      
+      console.error("Error", error);
+      toast.error("Error deleting trip");
     }
   }
 
@@ -42,10 +43,10 @@ function MyTrips() {
       await updateDoc(tripRef, {
         isFavorite: !trip.isFavorite
       });
-      // toast.success(trip.isFavorite ? "Removed from favorites" : "Added to favorites");
+      toast.success(trip.isFavorite ? "Removed from favorites" : "Added to favorites");
       GetUserTrip();
     } catch (error) {
-      // toast.error("Error updating favorite status");
+      toast.error("Error updating favorite status");
       console.error("Error updating favorite:", error);
     }
   };
@@ -59,12 +60,12 @@ function MyTrips() {
   }, []);
   
   return (
-    <div className="sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10">
+    <div className="px-8 mb-20">
       <h2 className="font-bold text-3xl mb-5">My Trips</h2>
       <Button
           variant="outline"
           onClick={() => setShowFavorites(!showFavorites)}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 my-5"
         >
           <FaHeart className={showFavorites ? "text-red-500" : ""} />
           {showFavorites ? "Show All" : "Show Favorites"}

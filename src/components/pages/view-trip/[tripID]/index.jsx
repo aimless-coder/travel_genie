@@ -5,6 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import InfoSection from "../components/InfoSection";
 import Hotels from "../components/Hotels";
 import Itinerary from "../components/Itinerary";
+import Weather from "../components/Weather";
 
 function ViewTrip() {
   const { tripID } = useParams();
@@ -29,8 +30,9 @@ function ViewTrip() {
   };
 
   return (
-    <div className="p-10">
+    <div className="px-8 mb-20">
       <InfoSection trip={trip} />
+      <Weather trip={trip}/>
       <Itinerary trip={trip} />
       <Hotels trip={trip} />
     </div>

@@ -36,7 +36,7 @@ function PlaceCard({ place }) {
       to={"https://www.google.com/maps/search/?api=1&query=" + place.placeName}
       target="_blank"
     >
-      <div className="shadow-md rounded-xl p-5 mt-2 flex gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
+      <div className="shadow-md rounded-xl p-2 md:p-5 mt-2 flex gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
       {loading ? (
           <img
             src={placeholderImg}
@@ -48,14 +48,14 @@ function PlaceCard({ place }) {
             className="rounded-lg h-[100px] w-[100px] object-cover"
           />
         )}
-        <div className="flex flex-col gap-2">
-          <h2 className="font-bold text-lg">{place.placeName}</h2>
-          <p className="text-gray-500 text-md">{place.placeDetails}</p>
-          <h2 className="font-medium text-md text-gray-500">
+        <div className="flex flex-1 flex-col gap-2">
+          <h2 className="font-bold text-base md:text-lg">{place.placeName}</h2>
+          <p className="text-gray-500 text-sm md:text-md">{place.placeDetails}</p>
+          <h2 className="font-medium text-sm md:text-md text-gray-500">
             {place.ticketPricing}
           </h2>
         </div>
-        <Button>
+        <Button className="hidden md:grid">
           <FaMapLocationDot />
         </Button>
       </div>

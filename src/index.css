@@ -67,22 +67,15 @@
   }
 }
 
-@keyframes moveRightFadeOut {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  50% {
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px; /* Adjust scrollbar height */
 }
 
-.animate-trip {
-  display: flex;
-  animation: moveRightFadeOut 2s infinite;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4b164c; /* Purple color */
+  border-radius: 9999px; /* Fully rounded */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #dd88cf49; /* Pink color */
 }
