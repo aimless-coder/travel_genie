@@ -30,7 +30,7 @@ function ViewTrip() {
   };
 
   return (
-    <div className="px-8 mb-20">
+    <div className="px-2 mb-20 mb:px-8">
       <InfoSection trip={trip} />
       <Weather trip={trip}/>
       <Itinerary trip={trip} />

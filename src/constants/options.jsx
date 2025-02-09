@@ -48,7 +48,7 @@ export const SelectTravelsList = [
 export const SelectBudgetOptions = [
   {
     id: 1,
-    title: "Budget Friendly",
+    title: "Cheap",
     desc: "Stay conscious of Cost",
     image: "/icons/cheap.png",
   },
