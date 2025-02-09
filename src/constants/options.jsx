@@ -3,7 +3,7 @@ export const SelectTravelsList = [
     id: 1,
     title: "Just Me",
     desc: "A solo in exploration",
-    icon: "🙎",
+    image: "/icons/solo.png",
     people: "1",
     guest:{
       adult: 1,
@@ -14,7 +14,7 @@ export const SelectTravelsList = [
     id: 2,
     title: "A Couple",
     desc: "Two traveler in tandem",
-    icon: "👩🏻‍❤️‍👨🏻",
+    image: "/icons/couple.png",
     people: "2",
     guest:{
       adult: 2,
@@ -25,7 +25,7 @@ export const SelectTravelsList = [
     id: 3,
     title: "Family",
     desc: "A family of adventure",
-    icon: "👨‍👩‍👧‍👦",
+    image: "/icons/family.png",
     people: "4",
     guest:{
       adult: 2,
@@ -36,7 +36,7 @@ export const SelectTravelsList = [
     id: 4,
     title: "Group",
     desc: "A solo in exploration",
-    icon: "👨‍👩‍👧‍👦",
+    image: "/icons/friend.png",
     people: "4+",
     guest:{
       adult: 4,
@@ -48,21 +48,21 @@ export const SelectTravelsList = [
 export const SelectBudgetOptions = [
   {
     id: 1,
-    title: "Cheap",
+    title: "Budget Friendly",
     desc: "Stay conscious of Cost",
-    icon: "💸",
+    image: "/icons/cheap.png",
   },
   {
     id: 2,
     title: "Moderate",
     desc: "Balanced Cost and Comfort",
-    icon: "💰",
+    image: "/icons/moderate.png",
   },
   {
     id: 3,
     title: "Luxury",
     desc: "High-end Comfort",
-    icon: "🏨",
+    image: "/icons/luxury.png",
   },
 ];
 

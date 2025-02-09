@@ -128,7 +128,7 @@ function CreateTrip() {
                 onClick={() => handleInputChange({budget: item.title})}
               >
                 <div className="flex md:flex-col items-center gap-3">
-                <h2 className="text-2xl">{item.icon}</h2>
+                <img src={item.image} className="w-[30px] md:w-[40px]" />
                 <div>
                 <h2 className="font-semibold md:text-center">{item.title}</h2>
                 <p className="text-sm text-gray-500 md:text-center">{item.desc}</p>
@@ -160,7 +160,7 @@ function CreateTrip() {
                 })}
               >
                 <div className="flex md:flex-col items-center gap-3">
-                <h2 className="text-2xl">{item.icon}</h2>
+                <img src={item.image} className="w-[30px] md:w-[40px]" />
                 <div>
                 <h2 className="font-semibold md:text-center">{item.title}</h2>
                 <p className="text-sm text-gray-500 md:text-center">{item.desc}</p>

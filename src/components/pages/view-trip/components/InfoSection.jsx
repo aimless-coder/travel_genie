@@ -15,8 +15,16 @@ import { db } from "@/service/FirebaseConfig";
 
 
 function InfoSection({ trip }) {
+  const [user, setUser] = useState(null);
   const [photoUrl, setPhotoUrl] = useState();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const placeholderImg = `https://placehold.co/340?text=${trip?.userSelection?.location?.label || 'Loading...'}`;
 
@@ -106,7 +114,7 @@ function InfoSection({ trip }) {
           {trip?.userSelection?.location?.label}
         </h2>
         <div className="hidden md:flex gap-5">
-          <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c]">Save Trip</Button>
+          {user && <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c]">Save Trip</Button>}
           <Button onClick={() => shareTrip(trip)} className="bg-[#4b164c]">Share <FaShareAlt /></Button>
         </div>
 
@@ -124,7 +132,7 @@ function InfoSection({ trip }) {
         </div>
 
         <div className="flex md:hidden gap-5 mt-2 w-full justify-between">
-          <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c] h-8">Save Trip</Button>
+          {user && <Button onClick={()=>saveTrip(trip)} className="bg-[#4b164c] h-8">Save Trip</Button>}
           <Button onClick={() => shareTrip(trip)} className="bg-[#4b164c] h-8">Share <FaShareAlt /></Button>
         </div>
 

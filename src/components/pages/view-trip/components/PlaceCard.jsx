@@ -55,7 +55,7 @@ function PlaceCard({ place }) {
             {place.ticketPricing}
           </h2>
         </div>
-        <Button className="hidden md:grid">
+        <Button className="hidden md:grid bg-[#4b164c]">
           <FaMapLocationDot />
         </Button>
       </div>
