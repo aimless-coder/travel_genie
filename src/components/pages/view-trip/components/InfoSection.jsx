@@ -98,7 +98,7 @@ function InfoSection({ trip }) {
             className="rounded-lg h-[340px] w-full object-cover"
           />
         ) : (
-          <Carousel className="relative w-full flex flex-col items-center mb-10">
+          <Carousel className="relative w-full flex flex-col items-center mb-[60px] ">
             <CarouselContent>
               {photoUrl.map((photo, index) => (
                 <CarouselItem key={index}><img src= {photo} className="rounded-lg h-[340px] w-full object-cover" /></CarouselItem>

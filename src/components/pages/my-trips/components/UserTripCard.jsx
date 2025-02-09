@@ -58,16 +58,16 @@ function UserTripCard({ trip, onDelete, onToggleFavorite }) {
             {trip?.userSelection?.noOfPeople} people.
           </h2>
 
-          <div className="flex w-full justify-evenly">
+          <div className="flex w-full justify-evenly gap-5">
           <Button
-              className={`${trip.isFavorite ? 'text-red-500' : 'text-white'} bg-[#4b164c] w-[70px] h-[30px]`}
+              className={`${trip.isFavorite ? 'text-red-500' : 'text-white'} bg-[#4b164c] w-[40px] md:w-[70px] h-[30px] `}
               onClick={handleFavorite}
             >
               {trip.isFavorite ? <FaHeart /> : <FaRegHeart />}
             </Button>
             <Button
             variant="destructive"
-            className="w-[70px] h-[30px]"
+            className="w-[40px] md:w-[70px] h-[30px]"
             onClick={handleDelete}
           >
               <FaTrash />
