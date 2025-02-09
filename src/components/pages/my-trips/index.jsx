@@ -60,7 +60,7 @@ function MyTrips() {
   }, []);
   
   return (
-    <div className="px-8 mb-20">
+    <div className="px-2 mb-20 mb:px-8">
       <h2 className="font-bold text-3xl mb-5">My Trips</h2>
       <Button
           variant="outline"

@@ -98,14 +98,16 @@ function InfoSection({ trip }) {
             className="rounded-lg h-[340px] w-full object-cover"
           />
         ) : (
-          <Carousel>
+          <Carousel className="relative w-full flex flex-col items-center mb-10">
             <CarouselContent>
               {photoUrl.map((photo, index) => (
                 <CarouselItem key={index}><img src= {photo} className="rounded-lg h-[340px] w-full object-cover" /></CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <div className="absolute w-[30%] -bottom-7">
+            <CarouselPrevious className="bg-[#4b164c] text-white"/>
+            <CarouselNext className="bg-[#4b164c] text-white"/>
+            </div>
           </Carousel>
         )}
       <div className="my-5 flex flex-col gap-2">

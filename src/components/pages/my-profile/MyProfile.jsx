@@ -127,7 +127,7 @@ function MyProfile() {
   }
 
   return (
-    <div className="px-8">
+    <div className="px-2 mb-20 mb:px-8">
       <div className="flex gap-5 items-center justify-between">
         <div className="w-full flex-1 grid place-items-center md:place-items-start gap-5">
             <div className="h-[120px] w-[120px] rounded-full border-2 border-[#4b164c]">
