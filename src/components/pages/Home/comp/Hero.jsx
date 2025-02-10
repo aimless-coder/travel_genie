@@ -68,7 +68,7 @@ function Hero() {
           <div className="absolute inset-0">
             <img src="/images/australia.webp" className="w-[85px] md:w-[100px] rounded-full absolute top-0 -left-5 md:-left-10" alt="Australia" />
             <img src="/images/mountain.webp" className="w-[65px] md:w-[70px] rounded-full absolute top-0 -right-5" alt="Mountain" />
-            <img src="/images/london.webp" className="w-[100px] md:w-[120px] rounded-full absolute -bottom-16 left-3" alt="London" />
+            <img src="/images/london.webp" className="w-[100px] md:w-[120px] rounded-full absolute -bottom-20 left-2" alt="London" />
           </div>
         </div>
       </div>

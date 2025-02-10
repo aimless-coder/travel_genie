@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   WiDaySunny,
   WiDayCloudy,
@@ -66,7 +66,7 @@ function Weather({trip}) {
         }
     }
 
-    const fetchWeather = async() => {
+    const fetchWeather = useCallback(async () => {
         try {
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
                 params: {
@@ -75,15 +75,14 @@ function Weather({trip}) {
                     units: 'metric'
                 }
             });
-
             setWeatherData(response.data);
 
         } catch (error) {
             console.error("Error:", error)
         }
-    }
+    }, [trip]);
 
-    const getCurrentTime = () => {
+    const getCurrentTime = useCallback(() => {
         if (!weatherData) return "";
         const localTimestamp = Date.now() + weatherData.timezone * 1000;
         const targetDate = new Date(localTimestamp);
@@ -92,13 +91,13 @@ function Weather({trip}) {
         const ampm = hours >= 12 ? "PM" : "AM";
         hours = hours % 12 || 12;
         return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${ampm}`;
-    }
+    }, [weatherData]);
 
     useEffect(() => {
         if (trip) {
             fetchWeather();
         }
-    }, [trip])
+    }, [trip, fetchWeather])
 
     useEffect(() => {
         if (weatherData) {
@@ -109,7 +108,7 @@ function Weather({trip}) {
 
             return () => clearInterval(intervalId);
         }
-    }, [weatherData])
+    }, [weatherData, getCurrentTime])
 
     if (!weatherData || !weatherData.main) return <div>Loading...</div>;
 

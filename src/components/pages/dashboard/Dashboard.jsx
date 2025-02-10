@@ -55,6 +55,7 @@ function Dashboard() {
   };
 
   return (
+    <>
     <div className="h-full">
       <header className="fixed top-0 left-0 w-full bg-white z-20 shadow-md h-[70px]">
         <div className="h-full py-2 px-5 md:px-20 flex justify-between items-center">
@@ -66,8 +67,9 @@ function Dashboard() {
               <div className="gap-4 hidden md:flex items-center">
                 <h2 className="text-lg font-semibold text-gray-700">{user.given_name}</h2>
                 <img 
-                  src={user?.picture} 
+                  src={user?.picture || '/icons/placeholder.png'} 
                   alt="" 
+                  referrerPolicy="no-referrer"
                   className="h-[40px] w-[40px] rounded-full border-2 border-[#4b164c] shadow-sm hover:shadow-md transition-all duration-300" 
                 />
               </div>
@@ -189,6 +191,7 @@ function Dashboard() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

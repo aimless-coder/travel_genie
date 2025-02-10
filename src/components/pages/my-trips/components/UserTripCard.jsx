@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { GetPlaceDetails, PHOTO_REF } from "@/service/GlobalAPI";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaTrash } from "react-icons/fa";
@@ -7,27 +7,28 @@ import { Button } from "@/components/ui/button";
 
 function UserTripCard({ trip, onDelete, onToggleFavorite }) {
   const [photoUrl, setPhotoUrl] = useState();
-  const getPlacePhoto = async () => {
+  const placeholderImg = `https://placehold.co/340?text=${trip?.userSelection?.location?.label || 'Loading...'}`;
+
+  const getPlacePhoto = useCallback(async () => {
     try {
       const tripText = trip?.userSelection?.location?.label;
-      const data = {
-        textQuery: tripText,
-      };
-
+      const data = { textQuery: tripText };
       const result = await GetPlaceDetails(data);
       const photoUrlVar = PHOTO_REF.replace(
         "{NAME}",
-        result.data.places[0].photos[3].name
+        result.data.places[0].photos[4].name
       );
       setPhotoUrl(photoUrlVar);
     } catch (error) {
       console.log("Error:", error);
     }
-  };
+  }, [trip]);
 
   useEffect(() => {
-    trip && getPlacePhoto();
-  }, [trip]);
+    if (trip) {
+      getPlacePhoto();
+    }
+  }, [trip, getPlacePhoto]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -43,10 +44,10 @@ function UserTripCard({ trip, onDelete, onToggleFavorite }) {
 
   return (
     <Link to={"/dashboard/view-trip/" + trip?.id}>
-      <div className="hover:scale-105 transition-all hover:shadow-md p-3 grid place-items-center gap-5 rounded-lg border border-gray-300 min-h-[300px]">
+      <div className="hover:scale-105 transition-all hover:shadow-md p-3 grid place-items-center gap-5 rounded-lg border border-gray-300 min-h-[300px] h-full">
         <img
-          src={photoUrl}
-          className="h-[150px] w-[150px] md:h-[180px] md:w-[180px] object-cover rounded-lg"
+          src={photoUrl || placeholderImg}
+          className="h-[150px] w-full md:h-[180px] md:w-full object-cover rounded-lg"
         />
         <div className="flex flex-col justify-center gap-2">
           <h2 className="font-medium text-md">

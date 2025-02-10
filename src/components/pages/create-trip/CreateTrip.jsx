@@ -92,12 +92,11 @@ function CreateTrip() {
 
       <div className="flex flex-col gap-10 mt-10">
         <div className="flex flex-col gap-5">
-          <div className="flex gap-3 items-center">
-          <img src="/icons/location.png" alt="" className="h-[30px] md:h-[40px]"/>
-          <div>
+          <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-2 items-center">
+          <img src="/icons/location.png" alt="" className="h-[30px] md:h-[50px] row-span-1 md:row-span-2 mr-2"/>
+
           <h2 className="text-xl font-semibold mb-1">Where Are You Headed?</h2>
-          <p className="text-gray-500 text-sm">Enter your destination, and we&apos;ll help you uncover the best attractions and experiences.</p>
-          </div>
+          <p className="text-gray-500 text-sm col-span-2 md:col-span-1">Enter your destination, and we&apos;ll help you uncover the best attractions and experiences.</p>
           </div>
           <GooglePlacesAutocomplete
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
@@ -111,12 +110,10 @@ function CreateTrip() {
           />
         </div>
         <div className="flex flex-col gap-5">
-          <div className="flex gap-3 items-center">
-          <img src="/icons/duration.png" alt="" className="h-[30px] md:h-[40px]"/>
-          <div>
+          <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-2 items-center">
+          <img src="/icons/duration.png" alt="" className="h-[30px] md:h-[50px] row-span-1 md:row-span-2 mr-2"/>
           <h2 className="text-xl font-semibold mb-1">Trip Duration</h2>
-          <p className="text-gray-500 text-sm">How many days are you planning to travel? Let us know so we can create a well-paced itinerary for you.</p>
-          </div>
+          <p className="text-gray-500 text-sm col-span-2 md:col-span-1">How many days are you planning to travel? Let us know so we can create a well-paced itinerary for you.</p>
           </div>
           <Input
             type="number"
@@ -126,12 +123,12 @@ function CreateTrip() {
         </div>
 
         <div>
-          <div className="flex gap-3 items-center">
-            <img src="/icons/budget.png" alt="" className="h-[30px] md:h-[40px]"/>
-            <div>
+          <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-2 items-center">
+            <img src="/icons/budget.png" alt="" className="h-[30px] md:h-[50px] row-span-1 md:row-span-2 mr-2"/>
+
               <h2 className="text-xl font-semibold mb-1">Set Your Budget</h2>
-              <p className="text-gray-500 text-sm">Pick a budget that works for you, whether you&apos;re looking for an affordable escape or a luxury getaway</p>
-            </div>
+              <p className="text-gray-500 text-sm col-span-2 md:col-span-1">Pick a budget that works for you, whether you&apos;re looking for an affordable escape or a luxury getaway</p>
+
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
@@ -156,15 +153,19 @@ function CreateTrip() {
         </div>
 
         <div>
-        <div className="flex gap-3 items-center">
-          <img src="/icons/guest.png" alt="" className="h-[30px] md:h-[40px]"/>
-          <div>
-          <h2 className="text-xl font-semibold mb-1">
-          Who&apos;s Traveling With You?
+        <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-2 items-center">
+          <img
+            src="/icons/guest.png"
+            alt=""
+            className="h-[30px] md:h-[50px] row-span-1 md:row-span-2 mr-2"
+          />
+          <h2 className="text-xl font-semibold">
+            Who&apos;s Traveling With You?
           </h2>
-          <p className="text-gray-500 text-sm">Choose who will be accompanying you on this journey—whether it&apos;s a solo trip, a family vacation, or an adventure with friends.</p>
-          </div>
-          </div>
+          <p className="text-gray-500 text-sm col-span-2 md:col-span-1">
+            Choose who will be accompanying you on this journey—whether it&apos;s a solo trip, a family vacation, or an adventure with friends.
+          </p>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
             {SelectTravelsList.map((item, index) => (
               <div

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { GetPlaceDetails, PHOTO_REF } from "@/service/GlobalAPI";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -29,12 +29,10 @@ function InfoSection({ trip }) {
 
   const placeholderImg = `https://placehold.co/340?text=${trip?.userSelection?.location?.label || 'Loading...'}`;
 
-  const getPlacePhoto = async () => {
+  const getPlacePhoto = useCallback(async () => {
     try {
       const location = trip?.userSelection?.location?.label;
-      const data = {
-        textQuery: location,
-      };
+      const data = { textQuery: location };
 
       const result = await GetPlaceDetails(data);
 
@@ -48,7 +46,7 @@ function InfoSection({ trip }) {
     } catch (error) {
       console.error("Error:", error);
     }
-  };
+  }, [trip]);
 
   const saveTrip = async(trip) => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -95,7 +93,7 @@ function InfoSection({ trip }) {
 
   useEffect(() => {
     trip && getPlacePhoto();
-  }, [trip]);
+  }, [trip, getPlacePhoto]);
 
   return (
     <div>

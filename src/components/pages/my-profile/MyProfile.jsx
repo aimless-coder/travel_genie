@@ -133,7 +133,12 @@ function MyProfile() {
       <div className="flex gap-5 items-center justify-between">
         <div className="w-full flex-1 grid place-items-center md:place-items-start gap-5">
             <div className="h-[120px] w-[120px] rounded-full border-2 border-[#4b164c]">
-            <img src={user?.picture} className="h-full w-full rounded-full" alt="Profile" />
+            <img 
+              src={user?.picture || '/icons/placeholder.png'} 
+              referrerPolicy="no-referrer"
+              className="h-full w-full rounded-full" 
+              alt="Profile" 
+            />
             </div>
             <div className="grid gap-3 w-full max-w-md">
           {isEditing ? (

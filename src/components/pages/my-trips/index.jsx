@@ -71,7 +71,7 @@ function MyTrips() {
           {showFavorites ? "Show All" : "Show Favorites"}
         </Button>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredTrips.length > 0 ? (
           filteredTrips.map((trip, index) => (
             <UserTripCard key={index} trip={trip} onDelete={() => deleteTrip(trip.id)} onToggleFavorite={() => toggleFavorite(trip.id)}/>
