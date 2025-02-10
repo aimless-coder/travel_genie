@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { FaShareAlt } from "react-icons/fa";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/service/FirebaseConfig";
+import { toast } from "sonner";
 
 
 function InfoSection({ trip }) {
@@ -52,14 +53,20 @@ function InfoSection({ trip }) {
   const saveTrip = async(trip) => {
     const user = JSON.parse(localStorage.getItem('user'))
     const docID = Date.now().toString();
-    await setDoc(doc(db, "AITrips", docID), {
-      userSelection: trip.userSelection,
-      tripData: trip.tripData,
-      userEmail: user?.email,
-      isFavorite: false,
-      id: docID
-    });
-    return docID;
+    try {
+      await setDoc(doc(db, "AITrips", docID), {
+        userSelection: trip.userSelection,
+        tripData: trip.tripData,
+        userEmail: user?.email,
+        isFavorite: false,
+        id: docID
+      });
+      toast.success("Trip saved successfully");
+      return docID;
+    } catch (error) {
+      console.error("Error in Saving data:", error);
+      toast.error("Some thing went wrong")
+    }
   }
 
   const shareTrip = async(trip) => {
@@ -78,11 +85,11 @@ function InfoSection({ trip }) {
         });
       } else {
         await navigator.clipboard.writeText(shareableLink);
-        alert("Link copied to clipboard!");
+        trip.success("Link copied to clipboard!");
       }
     } catch (error) {
       console.error("Error sharing trip:", error);
-      alert("Failed to share trip");
+      toast.error("Trip not copied.")
     }
   };
 

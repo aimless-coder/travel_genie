@@ -36,7 +36,7 @@ function PlaceCard({ place }) {
       to={"https://www.google.com/maps/search/?api=1&query=" + place.placeName}
       target="_blank"
     >
-      <div className="shadow-md rounded-xl p-2 md:p-5 mt-2 flex gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
+      <div className="shadow-md rounded-xl p-2 md:p-5 mt-2 flex flex-col md:flex-row gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
       {loading ? (
           <img
             src={placeholderImg}
