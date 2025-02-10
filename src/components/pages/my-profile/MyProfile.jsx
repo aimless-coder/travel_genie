@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ActivityCategories } from "@/constants/categories";
 import { db } from "@/service/FirebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -23,7 +23,7 @@ function MyProfile() {
     country: "",
   });
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     try {
       const userRef = doc(db, "UserDetails", user?.email);
       const docSnap = await getDoc(userRef);
@@ -49,13 +49,13 @@ function MyProfile() {
       toast.error("Failed to load user data");
       setLoading(false);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     if (user?.email) {
       fetchUserData();
     }
-  }, [user?.email]);
+  }, [user?.email, fetchUserData]);
 
   const saveUserData = async (newCategories = selectedCategories) => {
     try {

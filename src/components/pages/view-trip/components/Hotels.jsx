@@ -14,31 +14,33 @@ function Hotels({ trip }) {
   useEffect(() => {
     const fetchLocationId = async () => {
       try {
-        const response = await axios.get('https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination', {
-          params: {
-            query: location,
-            locale: 'en-us',
-          },
-          headers: {
-            'x-rapidapi-key': import.meta.env.VITE_RAPITAPI_BOOKINGDOTCOM,
-            'x-rapidapi-host': 'booking-com15.p.rapidapi.com'
+        const response = await axios.get(
+          'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination',
+          {
+            params: {
+              query: location,
+              locale: 'en-us',
+            },
+            headers: {
+              'x-rapidapi-key': import.meta.env.VITE_RAPITAPI_BOOKINGDOTCOM,
+              'x-rapidapi-host': 'booking-com15.p.rapidapi.com'
+            }
           }
-        });
-        setLocationId(response.data?.data?.[0]?.dest_id)
-        setLocationType(response?.data?.data?.[0]?.dest_type)
-
+        );
+        setLocationId(response.data?.data?.[0]?.dest_id);
+        setLocationType(response.data?.data?.[0]?.dest_type);
       } catch (error) {
         console.error('Error fetching location ID:', error);
       }
     };
 
     fetchLocationId();
-  }, [trip]);
+  }, [trip, location]);
 
   useEffect(() => {
     if (locationId) {
       const currentDate = new Date();
-      const days = +(trip?.userSelection?.noOfDays)
+      const days = +(trip?.userSelection?.noOfDays);
       const startDate = format(currentDate, 'yyyy-MM-dd');
       const endDate = format(addDays(currentDate, days), 'yyyy-MM-dd');
 
@@ -60,7 +62,6 @@ function Hotels({ trip }) {
             }
           });
           setHotels(response.data.data.hotels);
-          
         } catch (error) {
           console.error('Error fetching hotels:', error);
         }
@@ -68,7 +69,7 @@ function Hotels({ trip }) {
 
       fetchHotels();
     }
-  }, [locationId]);
+  }, [locationId, locationType, trip?.userSelection?.guest?.adult, trip?.userSelection?.noOfDays]);
 
   return (
     <div className="py-4 flex flex-col w-full">

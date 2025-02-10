@@ -1,6 +1,6 @@
 import { db } from "@/service/FirebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import InfoSection from "../components/InfoSection";
 import Hotels from "../components/Hotels";
@@ -12,13 +12,7 @@ function ViewTrip() {
   const location = useLocation();
   const [trip, setTrip] = useState(location.state || {});
 
-  useEffect(() => {
-    if (tripID) {
-      getTripData();
-    }
-  }, [tripID]);
-
-  const getTripData = async () => {
+  const getTripData = useCallback(async () => {
     const docRef = doc(db, "AITrips", tripID);
     const docSnap = await getDoc(docRef);
 
@@ -27,7 +21,13 @@ function ViewTrip() {
     } else {
       console.log("No such data");
     }
-  };
+  }, [tripID]);
+
+  useEffect(() => {
+    if (tripID) {
+      getTripData();
+    }
+  }, [tripID, getTripData]);
 
   return (
     <div className="px-2 mb-20 mb:px-8">
