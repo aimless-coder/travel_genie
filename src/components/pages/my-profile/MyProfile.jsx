@@ -9,6 +9,8 @@ import { IoMailOpenOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { BsGlobeCentralSouthAsia } from "react-icons/bs";
 import { Button } from "@/components/ui/button";
+import { countryOptions } from "@/constants/countryOptions";
+import Select from "react-select";
 
 function MyProfile() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -144,6 +146,7 @@ function MyProfile() {
                   value={profile.name}
                   onChange={handleProfileChange}
                   className="w-full p-2 border rounded-md"
+                  maxLength={30}
                   required
                 />
               </div>
@@ -163,16 +166,26 @@ function MyProfile() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1">Country</label>
-                <input
-                  type="text"
-                  name="country"
-                  value={profile.country}
-                  onChange={handleProfileChange}
-                  className="w-full p-2 border rounded-md"
-                  required
-                />
-              </div>
+          <label className="block text-sm font-bold mb-1">Country</label>
+          <Select
+            options={countryOptions}
+            value={
+              profile.country
+                ? { value: profile.country, label: profile.country }
+                : null
+            }
+            onChange={(selectedOption) =>
+              setProfile((prev) => ({
+                ...prev,
+                country: selectedOption ? selectedOption.value : "",
+              }))
+            }
+            className="w-full"
+            classNamePrefix="react-select"
+            placeholder="Select a country"
+            isClearable
+          />
+        </div>
               <div className="flex gap-2 w-full justify-evenly">
                 <Button
                   type="submit"

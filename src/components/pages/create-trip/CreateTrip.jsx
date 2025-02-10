@@ -53,6 +53,13 @@ function CreateTrip() {
       toast.error("Please fill in all fields");
       return;
     }
+
+    const days = parseInt(formData.noOfDays, 10);
+    if (isNaN(days) || days <= 0 || days > 7) {
+      toast.error("Trip duration must be between 1 and 7 days");
+      return;
+    }
+
     setLoading(true);
 
     const FINAL_PROMPT = AI_PROMPT.replace(
@@ -85,9 +92,12 @@ function CreateTrip() {
 
       <div className="flex flex-col gap-10 mt-10">
         <div className="flex flex-col gap-5">
+          <div className="flex gap-3 items-center">
+          <img src="/icons/location.png" alt="" className="h-[30px] md:h-[40px]"/>
           <div>
           <h2 className="text-xl font-semibold mb-1">Where Are You Headed?</h2>
           <p className="text-gray-500 text-sm">Enter your destination, and we&apos;ll help you uncover the best attractions and experiences.</p>
+          </div>
           </div>
           <GooglePlacesAutocomplete
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
@@ -101,9 +111,12 @@ function CreateTrip() {
           />
         </div>
         <div className="flex flex-col gap-5">
+          <div className="flex gap-3 items-center">
+          <img src="/icons/duration.png" alt="" className="h-[30px] md:h-[40px]"/>
           <div>
           <h2 className="text-xl font-semibold mb-1">Trip Duration</h2>
           <p className="text-gray-500 text-sm">How many days are you planning to travel? Let us know so we can create a well-paced itinerary for you.</p>
+          </div>
           </div>
           <Input
             type="number"
@@ -113,11 +126,14 @@ function CreateTrip() {
         </div>
 
         <div>
-          <div>
-          <h2 className="text-xl font-semibold mb-1">Set Your Budget</h2>
-          <p className="text-gray-500 text-sm">Pick a budget that works for you, whether you&apos;re looking for an affordable escape or a luxury getaway</p>
-
+          <div className="flex gap-3 items-center">
+            <img src="/icons/budget.png" alt="" className="h-[30px] md:h-[40px]"/>
+            <div>
+              <h2 className="text-xl font-semibold mb-1">Set Your Budget</h2>
+              <p className="text-gray-500 text-sm">Pick a budget that works for you, whether you&apos;re looking for an affordable escape or a luxury getaway</p>
+            </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
             {SelectBudgetOptions.map((item, index) => (
               <div
@@ -140,11 +156,14 @@ function CreateTrip() {
         </div>
 
         <div>
+        <div className="flex gap-3 items-center">
+          <img src="/icons/guest.png" alt="" className="h-[30px] md:h-[40px]"/>
           <div>
           <h2 className="text-xl font-semibold mb-1">
           Who&apos;s Traveling With You?
           </h2>
           <p className="text-gray-500 text-sm">Choose who will be accompanying you on this journey—whether it&apos;s a solo trip, a family vacation, or an adventure with friends.</p>
+          </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
             {SelectTravelsList.map((item, index) => (

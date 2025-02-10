@@ -36,16 +36,18 @@ function PlaceCard({ place }) {
       to={"https://www.google.com/maps/search/?api=1&query=" + place.placeName}
       target="_blank"
     >
-      <div className="shadow-md rounded-xl p-2 md:p-5 mt-2 flex flex-col md:flex-row gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
+      <div className="shadow-md rounded-xl p-2 md:p-5 mt-2 flex flex-col md:flex-row gap-2 md:gap-5 items-center justify-between hover:scale-105 transition-all hover:shadow-lg cursor-pointer">
+
+
       {loading ? (
           <img
             src={placeholderImg}
-            className="rounded-lg h-[100px] w-[100px] object-cover"
+            className="rounded-lg h-[100px] w-full md:w-[100px] object-cover"
           />
         ) : (
           <img
             src={photoUrl || placeholderImg}
-            className="rounded-lg h-[100px] w-[100px] object-cover"
+            className="rounded-lg h-[100px] w-full md:w-[100px] object-cover"
           />
         )}
         <div className="flex flex-1 flex-col gap-2">
