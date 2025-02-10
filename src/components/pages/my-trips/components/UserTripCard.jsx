@@ -43,7 +43,7 @@ function UserTripCard({ trip, onDelete, onToggleFavorite }) {
 
   return (
     <Link to={"/dashboard/view-trip/" + trip?.id}>
-      <div className="hover:scale-105 transition-all hover:shadow-md p-3 grid place-items-center gap-5 rounded-lg border border-gray-300">
+      <div className="hover:scale-105 transition-all hover:shadow-md p-3 grid place-items-center gap-5 rounded-lg border border-gray-300 min-h-[300px]">
         <img
           src={photoUrl}
           className="h-[150px] w-[150px] md:h-[180px] md:w-[180px] object-cover rounded-lg"

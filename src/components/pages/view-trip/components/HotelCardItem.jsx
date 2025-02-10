@@ -56,7 +56,7 @@ function HotelCardItem({ hotel }) {
           </div>
           <div className="flex items-center gap-3">
             <FaMoneyBillWave />
-            <h2 className="text-xs">{hotel?.property?.priceBreakdown?.grossPrice?.value.toFixed(2)} {hotel?.property?.priceBreakdown?.grossPrice?.currency}</h2>
+            <h2 className="text-xs">{Math.floor(hotel?.property?.priceBreakdown?.grossPrice?.value)} <span className="text-sm text-bold text-gray-500">{hotel?.property?.priceBreakdown?.grossPrice?.currency}</span> </h2>
           </div>
           <div className="flex items-center gap-3">
           <FaStar />

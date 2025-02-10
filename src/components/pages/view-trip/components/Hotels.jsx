@@ -7,6 +7,7 @@ import {addDays, format} from "date-fns"
 function Hotels({ trip }) {
   const [hotels, setHotels] = useState([]);
   const [locationId, setLocationId] = useState(null);
+  const [locationType, setLocationType] = useState(null);
 
   const location = trip?.userSelection?.location?.label;
 
@@ -24,6 +25,7 @@ function Hotels({ trip }) {
           }
         });
         setLocationId(response.data?.data?.[0]?.dest_id)
+        setLocationType(response?.data?.data?.[0]?.dest_type)
 
       } catch (error) {
         console.error('Error fetching location ID:', error);
@@ -45,7 +47,7 @@ function Hotels({ trip }) {
           const response = await axios.get('https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels', {
             params: {
               dest_id: locationId,
-              search_type: 'CITY',
+              search_type: locationType,
               arrival_date: startDate,
               departure_date: endDate,
               adults: trip?.userSelection?.guest?.adult,
@@ -70,7 +72,7 @@ function Hotels({ trip }) {
 
   return (
     <div className="py-4 flex flex-col w-full">
-  <h2 className="font-bold text-xl mt-1.5 mb-2">Hotel Recommendation</h2>
+  <h2 className="font-bold text-xl mt-1.5 mb-2">Recommended Hotels</h2>
   <div className="w-full overflow-x-auto custom-scrollbar py-5">
     <div className="flex gap-6 px-4 snap-x snap-mandatory">
       {hotels.length > 0 ? (
