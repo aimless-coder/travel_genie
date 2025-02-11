@@ -17,10 +17,10 @@ Live demo, visit [Travel Genie](https://travel-genie-eight.vercel.app/)
 
 ## Demo
 
-![Screenshot 1](./public/images/demo1.png)
+![Screenshot 1](./public/screenshot/demo1.png)
 _Screenshot 1_
 
-![Screenshot 2](./public/images/demo2.png)
+![Screenshot 2](./public/screenshot/demo2.png)
 _Screenshot 2_
 
 ## Features
@@ -47,7 +47,7 @@ _Screenshot 2_
 1. **Clone the Repository:**
 
    ```bash
-   https://github.com/aimless-coder/travel_genie.git
+   git clone https://github.com/aimless-coder/travel_genie.git
    cd travel_genie
    ```
 
