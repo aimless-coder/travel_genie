@@ -18,10 +18,9 @@ Live demo, visit [Travel Genie](https://travel-genie-eight.vercel.app/)
 ## Demo
 
 ![Screenshot 1](./public/screenshot/demo1.png)
-_Screenshot 1_
 
 ![Screenshot 2](./public/screenshot/demo2.png)
-_Screenshot 2_
+
 
 ## Features
 
