@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { ActivityCategories } from "@/constants/categories";
 import { db } from "@/service/FirebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -18,44 +18,35 @@ function MyProfile() {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    name: "",
+    name: user?.name || "",
     gender: "",
     country: "",
   });
 
-  const fetchUserData = useCallback(async () => {
-    try {
-      const userRef = doc(db, "UserDetails", user?.email);
-      const docSnap = await getDoc(userRef);
-      
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        setSelectedCategories(userData.categories || []);
-        setProfile({
-          name: userData.name || user?.name || "",
-          gender: userData.gender || "",
-          country: userData.country || "",
-        });
-      } else {
-        setProfile({
-          name: user?.name || "",
-          gender: "",
-          country: "",
-        });
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      toast.error("Failed to load user data");
-      setLoading(false);
-    }
-  }, [user]);
-
   useEffect(() => {
-    if (user?.email) {
-      fetchUserData();
-    }
-  }, [user?.email, fetchUserData]);
+    const fetchData = async () => {
+      try {
+        const userRef = doc(db, "UserDetails", user.email);
+        const docSnap = await getDoc(userRef);
+        
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setSelectedCategories(userData.categories || []);
+          setProfile({
+            name: userData.name || user.name || "",
+            gender: userData.gender || "",
+            country: userData.country || "",
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user?.email]);
 
   const saveUserData = async (newCategories = selectedCategories) => {
     try {
