@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import PlaceCard from "./PlaceCard";
 
 function Itinerary({ trip }) {
+  useEffect(() => {}, [trip])
   return (
     <div className="min-w-full">
       <h2 className="font-bold text-lg mb-5">Places to Visit</h2>
